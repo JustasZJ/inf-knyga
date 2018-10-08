@@ -111,7 +111,18 @@ ir suskaičiuokime atliekamų elementarių veiksmų skaičių.
                                   // (priskyrimas ir sumavimas)
       end;
   writeln(suma);                  // vieną kartą
-
+  
+  int n, suma=0;
+  cin>>n;
+  for(int i=1; i<=n; i++)
+      for(int j=1; j<=n; j++)
+      {
+          int a;
+          cin>>a;
+          suma+=a;
+      }
+  cout<<suma<<"\n";
+    
 Elementarių veiksmų skaičius lygus
 :math:`1 + 1 + n + n^2 + n^2 + 2n^2 + 1 = 4n^2 + n + 3`.
 Jį nusako funkcija :math:`f(n) = 4n^2 + n + 3`. Tai ir yra šio
