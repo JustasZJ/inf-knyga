@@ -112,6 +112,8 @@ ir suskaičiuokime atliekamų elementarių veiksmų skaičių.
       end;
   writeln(suma);                  // vieną kartą
   
+.. code-block:: cpp
+  
   int n, suma=0;
   cin>>n;
   for(int i=1; i<=n; i++)
@@ -257,7 +259,9 @@ paprasta programa:
           inc(veiksmųSk);
       writeln(veiksmųSk);
   end.
-  
+
+.. code-block:: cpp
+
   int veiksmuSk=0, pradzia=clock();
   while(clock()-pradzia<1000)
       veiksmuSk++;
@@ -364,6 +368,8 @@ Pats paprasčiausias būdas – perrinkti visas galimas indeksų :math:`i` ir
       until (j = n) or rasta;
   until (i = n) or rasta;
   
+.. code-block:: cpp
+  
   bool rasta=false;
   for(int i=0; i<n; i++)
       for(int j=i; j<n; j++)
@@ -408,6 +414,8 @@ indeksą :math:`j`, prie sumos tiesiog pridėsime sekos narį :math:`a_j`.
       until (j = n) or (suma >= k);
       rasta := (suma = k);
   until (i = n) or rasta;
+  
+.. code-block:: cpp
   
   bool rasta=false;
   for(int i=0; i<n; i++)
@@ -464,6 +472,8 @@ nutrauks darbą.
           i := i + 1;
       end;
   rasta := (suma = k);
+  
+.. code-block:: cpp
   
   bool rasta=false;
   int suma=a[0], i=0, j=0;
