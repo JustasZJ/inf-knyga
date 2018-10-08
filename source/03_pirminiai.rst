@@ -100,6 +100,16 @@ Apibendrinę šiuos pastebėjimus, galime parašyti pakankamai spartų
       if n mod d = 0 then pirminis := false
       else d := d + 2;
   end;
+  
+  bool pirminis(int n)
+  {
+      if(n==1)return false;
+      if(n==2)return true;
+      if(n%2==0)return false;
+      for(int i=3; i*i<=n; i+=2)
+          if(n%i==0)return false;
+      return true;
+  }
 
 Įvykdę funkciją ``pirminis`` galime atsakyti į skyrelio pradžioje
 pateiktą klausimą – skaičius 234234743 tikrai pirminis.
@@ -198,6 +208,13 @@ loginiu masyvu pirm.
         j := j + k;
       end;
     end;
+    
+  bool pirm[n+1];
+  for(int i=2; i<=n; i++)
+      pirm[i]=true;
+  for(int i=2; i*i<=n; i++)if(pirm[i])
+      for(int j=i*i; j<=n; j+=i)//kai n didelis i ir j turetu buti long long tipo kintamieji
+              pirm[j]=false;  
 
 Šis algoritmas reikalauja :math:`O(n)` atminties (loginiam masyvui).
 Turbūt ne taip akivaizdu, kad algoritmas reikalauja
@@ -236,6 +253,17 @@ pirminis, funkciją galime pakeisti spartesne:
       else
         i := i + 1;
   end;
+  
+  bool pirminis(int sk)
+  {
+      if(sk==1)return false;
+      for(int i=0; i<p.size(); i++)
+      {
+          if(p[i]*p[i]>sk)break;
+          if(sk%p[i]==0)return false;
+      }
+      return true;
+  }
 
 Pirminių skaičių paieška tęsiasi
 ================================
