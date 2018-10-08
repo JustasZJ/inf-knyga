@@ -257,7 +257,12 @@ paprasta programa:
           inc(veiksmųSk);
       writeln(veiksmųSk);
   end.
-
+  
+  int veiksmuSk=0, pradzia=clock();
+  while(clock()-pradzia<1000)
+      veiksmuSk++;
+  cout<<veiksmuSk<<"\n";
+    
 Ši programa suskaičiuoja, kiek elementarių veiksmų kompiuteris gali
 atlikti per vieną sekundę (suprantama, jei programą pradėjote ir baigėte
 vykdyti tą pačią parą). Be abejo, matavimai nėra visiškai tikslūs,
@@ -358,7 +363,17 @@ Pats paprasčiausias būdas – perrinkti visas galimas indeksų :math:`i` ir
           rasta := (suma = k);
       until (j = n) or rasta;
   until (i = n) or rasta;
-
+  
+  bool rasta=false;
+  for(int i=0; i<n; i++)
+      for(int j=i; j<n; j++)
+      {
+          int suma=0;
+          for(int l=i; l<=j; l++)
+              suma+=a[l];
+          if(suma==k)rasta=true;
+      }
+  
 Jei algoritmui baigus darbą kintamojo rasta reikšmė bus lygi true, tai
 :math:`i` ir :math:`j` bus ieškomi indeksai. Suskaičiavę, kiek elementarių
 veiksmų blogiausiu atveju atlieka algoritmas, pamatytume, kad greičiausiai
@@ -393,7 +408,20 @@ indeksą :math:`j`, prie sumos tiesiog pridėsime sekos narį :math:`a_j`.
       until (j = n) or (suma >= k);
       rasta := (suma = k);
   until (i = n) or rasta;
-
+  
+  bool rasta=false;
+  for(int i=0; i<n; i++)
+  {
+      int suma=0;
+      for(int j=i; j<n; j++)
+      {
+          suma+=a[j];
+          if(suma==k)rasta=true;
+          if(suma>=k)break;
+      }
+      if(rasta)break;
+  }
+    
 Šį algoritmą sudaro du ciklai, antrasis jų pirmojo viduje, ir abiejų
 ilgis tiesiogiai priklauso nuo :math:`n`. Blogiausiu atveju abiejuose cikluose
 bus vykdoma :math:`n` žingsnių (pavyzdžiui, jei visi sekos nariai – nuliai,
@@ -436,7 +464,24 @@ nutrauks darbą.
           i := i + 1;
       end;
   rasta := (suma = k);
-
+  
+  bool rasta=false;
+  int suma=a[0], i=0, j=0;
+  while(suma!=k && j<n)
+  {
+      if(suma<k)
+      {
+          j++;
+          if(j!=n)suma+=a[j];
+      }
+      else
+      {
+          suma-=a[i];
+          i++;
+      }
+      if(suma==k)rasta=true;
+  }
+    
 Kadangi vienu žingsniu padidinamas tik vienas iš indeksų ir kiekvienas
 iš indeksų gali būti padidintas ne daugiau kaip :math:`n` kartų, daugių
 daugiausia gali tekti įvykdyti :math:`2n` žingsnių. Algoritmo sudėtingumas
