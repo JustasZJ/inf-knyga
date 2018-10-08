@@ -127,7 +127,18 @@ Gavome :math:`DBD(12, 8) = 4`. Užrašysime Euklido algoritmą Paskalio kalba
     end;
     DBD := a;
   end;
-
+  
+  int DBD(int a, int b)
+  {
+      while(b>0)
+      {
+          int c=a;
+          a=b;
+          b=c%b;
+      }
+      return a;
+  }
+  
 Jei reikia rasti dviejų skaičių DBD, tačiau nežinome, ar jie
 teigiami, funkciją iškviečiame perduodami skaičių modulius:
 ``DBD(abs(a), abs(b))``.
@@ -197,6 +208,12 @@ tai Euklido algoritmą nesunku užrašyti rekursyvia [#f7]_ funkcija:
     else
       DBD := DBD(b, a mod b);
   end;
+  
+  int DBD(int a, int b)
+  {
+      if(b==0) return a;
+      else return DBD(b, a%b);
+  }
 
 Pastebėkime, kad jei :math:`a < b`, algoritmas pirmu žingsniu šiuos
 skaičius sukeičia vietomis, pavyzdžiui,
@@ -226,6 +243,11 @@ bendrąjį kartotinį:
   begin
     MBK := a * b div DBD(a, b);
   end;
+  
+  int MBK(int a, int b)
+  {
+      return a*b/DBD(a, b);
+  }
 
 .. note::
 
@@ -251,13 +273,21 @@ fragmentą, randantį visų :math:`k` skaičių :math:`DBD` ir
   visųDBD := 0; { po pirmo žingsnio taps lygiu m[1] }
   for i := 1 to k do
     visųDBD := DBD(abs(m[i]), visųDBD);
-
+   
+  int visuDBD=0;
+  for(int i=0; i<k; i++)
+      visuDBD=DBD(abs(m[i]), visuDBD);
+  
 .. code-block:: unicode_pascal
 
   visųMBK := 1; { po pirmo žingsnio taps lygiu m[1] }
   for i := 1 to k do
     visųMBK := MBK(abs(m[i]), visųMBK);
-
+    
+  int visuMBK=1;
+  for(int i=0; i<k; i++)
+      visuMBK=MBK(abs(m[i]), visuMBK);
+        
 .. rubric:: Išnašos
 
 .. [#f7]
